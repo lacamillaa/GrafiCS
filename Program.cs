@@ -30,12 +30,12 @@ namespace GrafiCS
         public class Arco
         {
             private int Peso;
-            private Nodo Src;
-            private Nodo Dest;
+            private int Src;
+            private int Dest;
 
-            public Arco(Nodo _src, Nodo _dest) : this(1, _src, _dest) { }
+            public Arco(int _src, int _dest) : this(1, _src, _dest) { }
 
-            public Arco(int _peso, Nodo _src, Nodo _dest)
+            public Arco(int _peso, int _src, int _dest)
             {
                 Peso = _peso;
                 Src = _src;
@@ -48,13 +48,13 @@ namespace GrafiCS
                 protected set { Peso = value; }
             }
 
-            public Nodo _src
+            public int _src
             {
                 get { return Src; }
                 protected set { Src = value; }
             }
 
-            public Nodo _dest
+            public int _dest
             {
                 get { return _dest; }
                 protected set {  Dest = value; }
@@ -72,10 +72,36 @@ namespace GrafiCS
                 return _nodo;
             }
 
-            public void Collega(int _peso, Nodo _src, Nodo _dest)
+            public void Collega(int _peso, int _src, int _dest)
             {
                 Arco _arco = new Arco(_peso, _src, _dest);
                 Archi.Add(_arco);
+            }
+
+            // rappresentazioni del grafo
+            public List<int>[] ListaAdiacenza()
+            {
+                // lista di nodi adiacenti a ogni nodo
+                List<int>[] res = new List<int>[Nodi.Count];
+                foreach (Arco _arco in Archi)
+                {
+                    res[_arco._src].Add(_arco._dest);
+                }
+                return res;
+            }
+
+            public bool[,] MatriceAdiacenza()
+            {
+                bool[,] res = new bool[Nodi.Count, Nodi.Count];
+                List<int>[] _listaAdj = ListaAdiacenza();
+                for (int n = 0; n < _listaAdj.Length; n++)
+                {
+                    foreach (int _neighbor in _listaAdj[n])
+                    {
+                        res[n, _neighbor] = true;
+                    }
+                }
+                return res;
             }
         }
     }
