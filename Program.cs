@@ -11,5 +11,54 @@ namespace GrafiCS
         static void Main(string[] args)
         {
         }
+
+        public class Nodo
+        {
+            private object Data;
+
+            public Nodo(object _data)
+            {
+                Data = _data;
+            }
+
+            public object _data
+            {
+                get { return Data; }
+            }
+        }
+
+        public class Arco
+        {
+            private int Peso;
+            private Nodo Src;
+            private Nodo Dest;
+
+            public Arco(Nodo _src, Nodo _dest) : this(1, _src, _dest) { }
+
+            public Arco(int _peso, Nodo _src, Nodo _dest)
+            {
+                Peso = _peso;
+                Src = _src;
+                Dest = _dest;
+            }
+
+            public int _peso
+            {
+                get { return Peso; }
+                protected set { Peso = value; }
+            }
+
+            public Nodo _src
+            {
+                get { return Src; }
+                protected set { Src = value; }
+            }
+
+            public Nodo _dest
+            {
+                get { return _dest; }
+                protected set {  Dest = value; }
+            }
+        }
     }
 }
