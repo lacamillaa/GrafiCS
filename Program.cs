@@ -124,6 +124,27 @@ namespace GrafiCS
                     }
                 }
             }
+
+            public void DFSVisita(int _start)
+            {
+                var _listaAdj = ListaAdiacenza();
+                bool[] _visitato = new bool[Nodi.Count];
+                Stack<int> _vicini = new Stack<int>();
+                _vicini.Push(_start);
+                while( _vicini.Count > 0)
+                {
+                    int _top = _vicini.Pop();
+                    _visitato[_top] = true;
+                    Console.WriteLine(Nodi[_top]._data);
+                    foreach (int _vicino in _listaAdj[_top])
+                    {
+                        if (!_visitato[_vicino])
+                        {
+                            _vicini.Push(_vicino);
+                        }
+                    }
+                }
+            }
         }
     }
 }
