@@ -103,6 +103,27 @@ namespace GrafiCS
                 }
                 return res;
             }
+
+            public void BFSVisita(int _start)
+            {
+                var _listaAdj = ListaAdiacenza();
+                bool[] _visitato = new bool[Nodi.Count];
+                Queue<int> _vicini = new Queue<int>();
+                _vicini.Enqueue(_start);
+                while (_vicini.Count > 0)
+                {
+                    int _top = _vicini.Dequeue();
+                    _visitato[_top] = true;
+                    Console.WriteLine(Nodi[_top]._data);
+                    foreach (int _vicino in _listaAdj[_top])
+                    {
+                        if (!_visitato[_vicino])
+                        {
+                            _vicini.Enqueue(_vicino);
+                        }
+                    }
+                }
+            }
         }
     }
 }
