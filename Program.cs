@@ -145,6 +145,42 @@ namespace GrafiCS
                     }
                 }
             }
+
+            public List<int> TopologicalSort()
+            {
+                List<int> res = new List<int>();
+                var _listaAdj = ListaAdiacenza();
+                // crea array con gradi entranti
+                int[] _indegrees = new int[Nodi.Count];
+                Stack<int> _daVisitare = new Stack<int>();
+                foreach (Arco _arco in Archi)
+                {
+                    _indegrees[_arco._dest]++;
+                }
+                for (int n = 0; n < Nodi.Count; n++)
+                {
+                    // prendi i nodi con grado entrante 0
+                    if (_indegrees[n] == 0)
+                    {
+                        _daVisitare.Push(n);
+                    }
+                }
+                bool[] _visitato = new bool[Nodi.Count];
+                while (_daVisitare.Count > 0)
+                {
+                    var _top = _daVisitare.Pop();
+                    _visitato[_top] = true;
+                    res.Add(_top);
+                    foreach (int _vicino in _listaAdj[_top])
+                    {
+                        if (!_visitato[_vicino] && --_indegrees[_vicino] == 0)
+                        {
+                            _daVisitare.Push(_vicino);
+                        }
+                    }
+                }
+                return res;
+            }
         }
     }
 }
