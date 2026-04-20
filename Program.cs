@@ -60,5 +60,23 @@ namespace GrafiCS
                 protected set {  Dest = value; }
             }
         }
+
+        public class Grafo
+        {
+            private List<Nodo> Nodi;
+            private List<Arco> Archi;
+
+            public Nodo AggiungiNodo(Nodo _nodo)
+            {
+                Nodi.Add(_nodo);
+                return _nodo;
+            }
+
+            public void Collega(int _peso, Nodo _src, Nodo _dest)
+            {
+                Arco _arco = new Arco(_peso, _src, _dest);
+                Archi.Add(_arco);
+            }
+        }
     }
 }
