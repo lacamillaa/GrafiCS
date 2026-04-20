@@ -61,6 +61,31 @@ namespace GrafiCS
             }
         }
 
+        public class DijkstraTableRecord
+        {
+            private bool Visited = false;
+            private uint Distanza = uint.MaxValue;
+            private int UltimaTappa = -1;
+
+            public bool _visited
+            {
+                get { return Visited; }
+                set { Visited = value; }
+            }
+
+            public uint _distanza
+            {
+                get { return Distanza; }
+                set { Distanza = value; }
+            }
+
+            public int _ultimaTappa
+            {
+                get { return UltimaTappa; }
+                set { UltimaTappa = value; }
+            }
+        }
+
         public class Grafo
         {
             private List<Nodo> Nodi;
@@ -104,6 +129,17 @@ namespace GrafiCS
                 return res;
             }
 
+            public List<Arco>[] ListaIncidenza()
+            {
+                // lista di archi incidenti a quel nodo
+                List<Arco>[] res = new List<Arco>[Nodi.Count];
+                foreach (Arco _arco in Archi)
+                {
+                    res[_arco._src].Add(_arco);
+                }
+                return res;
+            }
+
             public void BFSVisita(int _start)
             {
                 var _listaAdj = ListaAdiacenza();
@@ -131,7 +167,7 @@ namespace GrafiCS
                 bool[] _visitato = new bool[Nodi.Count];
                 Stack<int> _vicini = new Stack<int>();
                 _vicini.Push(_start);
-                while( _vicini.Count > 0)
+                while (_vicini.Count > 0)
                 {
                     int _top = _vicini.Pop();
                     _visitato[_top] = true;
